@@ -39,6 +39,10 @@ void inputText(char ***text, int *rows) {
             read--;
         }
 
+        if (read == 1 && line[0] == '\n') {
+            break;
+        }
+
         if (read == 0) {
             break;
         }
@@ -63,9 +67,29 @@ void inputText(char ***text, int *rows) {
             exit(1);
         }
 
-        strcpy((*text)[*rows], line);
-        (*rows)++;
+        strcpy((*text)[(*rows)++], line);
     }
 
     free(line);
+}
+
+int coutWordsInFile(char * filename){
+    FILE * file = fopen(filename, "rt");
+    int words = 0, i = 1;
+    char buff;
+
+    while(fread(&buff, sizeof(char), 1, file) == 1){
+        fseek(file, i * sizeof(char), SEEK_SET);
+
+        if(buff == ' ' || buff == '\0' || buff == '\n'){
+            fseek(file, (i++) * sizeof(char), SEEK_SET);
+            words++;
+        }
+
+        i++;
+    }
+
+    fclose(file);
+
+    return words;
 }

@@ -24,5 +24,9 @@ int main(int argc, char *argv[]) {
         fprintf(file, "%s\n", text[i]);
     }
 
+    fclose(file);
+
+    printf("Количество слов в файле - %d\n", coutWordsInFile(filename));
+
     free(text);
 }
