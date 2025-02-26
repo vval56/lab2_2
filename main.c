@@ -1,4 +1,4 @@
-#include "header.h"
+#include "functions.h"
 
 int main(int argc, char *argv[]) {
     if (argc < 2) {
@@ -27,6 +27,12 @@ int main(int argc, char *argv[]) {
     fclose(file);
 
     printf("Количество слов в файле - %d\n", coutWordsInFile(filename));
+
+    reverseLongestInFile(filename);
+
+    puts("Текстовый файл с превернутым длинным словом");
+
+    printFile(filename);
 
     free(text);
 }
